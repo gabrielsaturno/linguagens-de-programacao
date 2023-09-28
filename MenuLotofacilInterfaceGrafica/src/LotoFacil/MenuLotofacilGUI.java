@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class MenuLotofacilGUI extends JFrame {
 
@@ -29,29 +30,60 @@ public class MenuLotofacilGUI extends JFrame {
         JbuttonAposta0a100.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String aposta = JOptionPane.showInputDialog(null, "Digite um número de 0 a 100: ");
-                int numAposta = Integer.parseInt(aposta);
-
-                JOptionPane.showMessageDialog(null, numAposta);
+                aposta1();
             }
         });
 
         JbuttonApostaAaZ.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String aposta = JOptionPane.showInputDialog(null, "Digite uma letra: ");
-
+                aposta2();
             }
         });
 
         JbuttonApostaParImpar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String aposta = JOptionPane.showInputDialog(null, "Digite um número: ");
-
+                aposta3();
             }
         });
 
+
     }
+    private void aposta1() {
+        String numAposta = JOptionPane.showInputDialog(null, "Digite um número de 0 a 100: ");
+        Random random = new Random();
+        int numSorteado = random.nextInt(101);
+        int numApostaInt = Integer.parseInt(numAposta);
+        if (numSorteado == numApostaInt) {
+            JOptionPane.showMessageDialog(null, "Você ganhou R$ 1.000,00!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Você perdeu! O número sorteado foi: " + numSorteado);
+        }
+    }
+    private void aposta2() {
+        String letraAposta = JOptionPane.showInputDialog(null, "Digite uma letra: ");
+        char letraSorteada = 'G';
+
+        if (Character.isLetter(letraAposta.charAt(0))) {
+            char letraApostaMaiuscula = Character.toUpperCase(letraAposta.charAt(0));
+            if (letraSorteada == letraApostaMaiuscula) {
+                JOptionPane.showMessageDialog(null, "Você ganhou R$ 500,00!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Você perdeu! A letra sorteada foi: " + letraSorteada);
+            }
+        }
+    }
+    private void aposta3() {
+        String numAposta = JOptionPane.showInputDialog(null, "Digite um número: ");
+        int num = Integer.parseInt(numAposta);
+
+        if (num % 2 == 0){
+            JOptionPane.showMessageDialog(null, "Você ganhou R$ 100,00!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Você perdeu!");
+        }
+    }
+
     public static void main(String[] args) { new MenuLotofacilGUI(); }
 }
